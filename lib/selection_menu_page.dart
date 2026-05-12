@@ -20,8 +20,10 @@ class SelectionMenuPage extends StatelessWidget {
             children: [
               _subjectButton(context, "Engasgo"),
               _subjectButton(context, "Ferimentos"),
-              _subjectButton(context, "Parada"),
+              _subjectButton(context, "Parada Cardíaca"),
               _subjectButton(context, "Queimaduras"),
+              _subjectButton(context, "Reações Alérgicas"),
+              _subjectButton(context, "Hemorragia Nasais"),
             ],
           ),
         ),

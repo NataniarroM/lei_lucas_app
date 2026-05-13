@@ -19,7 +19,7 @@ class LucasLawPage extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              // Cabeçalho com ícone de logo
+              // Cabeçalho
               _buildHeader(context),
 
               Expanded(
@@ -27,7 +27,7 @@ class LucasLawPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
                     children: [
-                      // Imagem Principal com borda arredondada
+                      // Imagem Principal
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset(
@@ -37,7 +37,7 @@ class LucasLawPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 30),
 
-                      // Texto da Lei em um card translúcido
+                      // Texto da Lei, os blocos são grandes mas é o que tem para hoje
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -94,7 +94,7 @@ class LucasLawPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const NavBar(), // Sua Navigation Bar atualizada
+              const NavBar(),
             ],
           ),
         ),
@@ -102,17 +102,18 @@ class LucasLawPage extends StatelessWidget {
     );
   }
 
+  // Cabeçalho
   Widget _buildHeader(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
         children: [
-          // Usamos Stack para garantir que o título ignore o tamanho dos vizinhos
+
           Stack(
             alignment: Alignment.center,
             children: [
-              // 1. Botão Voltar (Alinhado à esquerda)
               Align(
+                //Botão de retorno
                 alignment: Alignment.centerLeft,
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white70),
@@ -120,7 +121,7 @@ class LucasLawPage extends StatelessWidget {
                 ),
               ),
 
-              // 2. Título Central (Sempre no meio da tela)
+              //LEI LUCAS - Agora centralizado, por favor
               const Text(
                 "Lei Lucas",
                 style: TextStyle(
@@ -130,7 +131,7 @@ class LucasLawPage extends StatelessWidget {
                 ),
               ),
 
-              // 3. Sua Logo (Alinhada à direita)
+              // Essa imagem não mexe muito, espero que esteja bom assim
               Align(
                 alignment: Alignment.topRight,
                 child: ClipRRect(

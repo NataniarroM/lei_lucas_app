@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'credits_page.dart';
 import 'selection_menu_page.dart';
 import 'navigation_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,16 +11,181 @@ class HomePage extends StatelessWidget {
   void _openSOS(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("X"),
+
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+
+        child: Container(
+          padding: const EdgeInsets.all(25),
+
+          decoration: BoxDecoration(
+            color: const Color(0xFFE53935),
+
+            borderRadius: BorderRadius.circular(30),
+
+            boxShadow: [
+              BoxShadow(
+                color: Colors.red.withOpacity(0.5),
+                blurRadius: 20,
+                spreadRadius: 3,
+              ),
+            ],
           ),
-        ],
-        title: const Text("EMERGÊNCIA"),
-        content: const Text("190 - 192 - 193"),
+
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+
+            children: [
+
+              const Icon(
+                Icons.warning_amber_rounded,
+                size: 80,
+                color: Colors.white,
+              ),
+
+              const SizedBox(height: 20),
+
+              const Text(
+                "EMERGÊNCIA",
+
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  letterSpacing: 1,
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
+              const Text(
+                "Números importantes",
+
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white70,
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              _buildEmergencyNumber(
+                "🚓 Polícia",
+                "190",
+                    () => _callNumber("190"),
+              ),
+              _buildEmergencyNumber(
+                "🚑 SAMU",
+                "192",
+                    () => _callNumber("192"),
+              ),
+
+              _buildEmergencyNumber(
+                "🚒 Bombeiros",
+                "193",
+                    () => _callNumber("193"),
+              ),
+
+              const SizedBox(height: 30),
+
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+
+                    foregroundColor: const Color(0xFFE53935),
+
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+
+                  child: const Text(
+                    "FECHAR",
+
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
+    );
+  }
+
+  Future<void> _callNumber(String number) async {
+
+    final Uri phoneUri = Uri(
+      scheme: 'tel',
+      path: number,
+    );
+
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    }
+  }
+
+
+  Widget _buildEmergencyNumber(
+      String title,
+      String number,
+      VoidCallback onTap,
+      ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+
+        child: InkWell(
+          onTap: onTap,
+
+          borderRadius: BorderRadius.circular(18),
+
+          child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(15),
+
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.15),
+
+          borderRadius: BorderRadius.circular(18),
+        ),
+
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+          children: [
+
+            Text(
+              title,
+
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+
+            Text(
+              number,
+
+              style: const TextStyle(
+                fontSize: 22,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
     );
   }
 
@@ -93,45 +260,165 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
 
-                          ElevatedButton(
-                            onPressed: () => _openShutUp(context),
-                            child: const Text("QUIZ DE TREINO"),
+                          const Icon(
+                            Icons.health_and_safety,
+                            size: 90,
+                            color: Colors.white,
                           ),
 
-                          const SizedBox(height: 15),
+                          const SizedBox(height: 20),
 
-                          ElevatedButton(
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                const SelectionMenuPage(),
-                              ),
+                          const Text(
+                            "Lei Lucas",
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              letterSpacing: 1.2,
                             ),
-                            child: const Text("APRENDER"),
                           ),
 
-                          const SizedBox(height: 15),
+                          const SizedBox(height: 10),
 
-                          ElevatedButton(
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                const CreditsPage(),
-                              ),
+                          const Text(
+                            "Primeiros socorros nas escolas",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white70,
                             ),
-                            child: const Text("INFORMAÇÕES"),
+                          ),
+
+                          SizedBox(
+                            width: 230,
+                            height: 55,
+
+                            child: ElevatedButton(
+                              onPressed: () => _openShutUp(context),
+
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white.withOpacity(0.85),
+
+                                foregroundColor: const Color(0xFF5E4FA2),
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+
+                                textStyle: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+
+                              child: const Text("QUIZ DE TREINO"),
+                            ),
+                          ),
+
+                          const SizedBox(height: 18),
+
+                          SizedBox(
+                            width: 230,
+                            height: 55,
+
+                            child: ElevatedButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                  const SelectionMenuPage(),
+                                ),
+                              ),
+
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white.withOpacity(0.85),
+
+                                foregroundColor: const Color(0xFF5E4FA2),
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+
+                                textStyle: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+
+                              child: const Text("APRENDER"),
+                            ),
+                          ),
+
+                          const SizedBox(height: 18),
+
+                          SizedBox(
+                            width: 230,
+                            height: 55,
+
+                            child: ElevatedButton(
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                  const CreditsPage(),
+                                ),
+                              ),
+
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white.withOpacity(0.85),
+
+                                foregroundColor: const Color(0xFF5E4FA2),
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+
+                                textStyle: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+
+                              child: const Text("INFORMAÇÕES"),
+                            ),
                           ),
 
                           const SizedBox(height: 25),
 
-                          ElevatedButton(
-                            onPressed: () => _openSOS(context),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
+                          SizedBox(
+                            width: 160,
+                            height: 60,
+
+                            child: ElevatedButton.icon(
+                              onPressed: () => _openSOS(context),
+
+                              icon: const Icon(
+                                Icons.warning_rounded,
+                                color: Colors.white,
+                                size: 28,
+                              ),
+
+                              label: const Text(
+                                "S.O.S",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFE53935),
+
+                                elevation: 10,
+
+                                shadowColor: Colors.redAccent,
+
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
                             ),
-                            child: const Text("SOS"),
                           ),
                         ],
                       ),

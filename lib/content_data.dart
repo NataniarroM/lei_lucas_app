@@ -24,7 +24,7 @@ class TopicContent {
 final Map<String, TopicContent> allTopics = {
   "Engasgo": TopicContent(
     title: "Engasgo",
-    emergencyImagePath: "",
+    emergencyImagePath: "assets/aprender/engasgoemergency.png",
     identifyList: [
       "Tosse forte ou silenciosa",
       "Dificuldade para respirar",
@@ -33,7 +33,7 @@ final Map<String, TopicContent> allTopics = {
       "Mãos no pescoço",
       "Perda de consciência",
     ],
-    techniqueImagePath: "",
+    techniqueImagePath: "assets/aprender/engasgotechnique.png",
     whatToDoList: [
       "Se a criança estiver tossindo, incentive a tossir",
       "Se não consegue respirar, chame ajuda imediatamente",
@@ -48,14 +48,14 @@ final Map<String, TopicContent> allTopics = {
       "Não sacuda a criança",
       "Não vire a criança de cabeça para baixo",
     ],
-    solutionImagePath: "",
+    solutionImagePath: "assets/aprender/engasgosolution.png",
     alertText: "Chame o SAMU 192 se a criança não respirar, ficar roxa, perder a consciência ou não conseguir tossir, falar ou chorar.",
   ),
 
   // Lorena, copie esse bloco e reescreva para cada conteúdo
   "Ferimentos": TopicContent(
     title: "Ferimentos",
-    emergencyImagePath: "",
+    emergencyImagePath: "assets/aprender/ferimentosemergency.png",
     identifyList: [
       "Cortes",
       "Arranhões",
@@ -63,7 +63,7 @@ final Map<String, TopicContent> allTopics = {
       "Objeto preso na pele",
       "Ferida suja ou profunda",
     ],
-    techniqueImagePath: "",
+    techniqueImagePath: "assets/aprender/ferimentostechnique.png",
     whatToDoList: [
       "Lave as mãos ou use luvas",
       "Lave ferimentos leves com água corrente",
@@ -77,14 +77,14 @@ final Map<String, TopicContent> allTopics = {
       "Não retire objeto preso",
       "Não toque diretamente no sangue sem proteção",
     ],
-    solutionImagePath: "",
+    solutionImagePath: "assets/aprender/ferimentossolution.png",
     alertText:
     "Chame ajuda se o sangramento for intenso, se houver objeto preso, ferimento profundo, mordida, pancada forte ou sinais de desmaio.",
   ),
 
   "Reações Alérgicas": TopicContent(
     title: "Reações Alérgicas",
-    emergencyImagePath: "",
+    emergencyImagePath: "assets/aprender/reacoesalergicasemergency.png",
     identifyList: [
       "Manchas vermelhas na pele",
       "Coceira",
@@ -92,7 +92,7 @@ final Map<String, TopicContent> allTopics = {
       "Falta de ar ou chiado",
       "Tontura, vômito ou desmaio",
     ],
-    techniqueImagePath: "",
+    techniqueImagePath: "assets/aprender/reacoesalergicastechnique.png",
     whatToDoList: [
       "Afaste a criança do possível causador da alergia",
       "Mantenha a criança calma e observada",
@@ -105,21 +105,21 @@ final Map<String, TopicContent> allTopics = {
       "Não espere os sintomas graves passarem sozinhos",
       "Não ofereça comida ou bebida se houver falta de ar",
     ],
-    solutionImagePath: "",
+    solutionImagePath: "assets/aprender/reacoesalergicassolution.png",
     alertText:
     "Chame o SAMU 192 imediatamente se houver falta de ar, inchaço na boca ou língua, desmaio, palidez ou piora rápida.",
   ),
 
   "Parada Cardíaca": TopicContent(
     title: "Parada Cardíaca",
-    emergencyImagePath: "",
+    emergencyImagePath: "assets/aprender/paradacardiacaemergency.png",
     identifyList: [
       "A criança não responde",
       "Não respira normalmente",
       "Está muito pálida ou arroxeada",
       "Está caída e sem reação",
     ],
-    techniqueImagePath: "",
+    techniqueImagePath: "assets/aprender/paradacardiacatechnique.png",
     whatToDoList: [
       "Chame a criança e toque nos ombros",
       "Peça para alguém ligar para o SAMU 192",
@@ -133,20 +133,20 @@ final Map<String, TopicContent> allTopics = {
       "Não ofereça comida ou bebida",
       "Não pare as compressões sem orientação",
     ],
-    solutionImagePath: "",
+    solutionImagePath: "assets/aprender/paradacardiacasolution.png",
     alertText:
     "Chame o SAMU 192 imediatamente se a criança não responder ou não respirar normalmente.",
   ),
 
   "Hemorragia Nasais": TopicContent(
     title: "Hemorragia Nasais",
-    emergencyImagePath: "",
+    emergencyImagePath: "assets/aprender/hemorragianasaisemergency.png",
     identifyList: [
       "Sangramento pelo nariz",
       "Sangue escorrendo pela frente do nariz",
       "Pode acontecer após pancada, calor, ressecamento ou alergia",
     ],
-    techniqueImagePath: "",
+    techniqueImagePath: "assets/aprender/hemorragianasaistechnique.png",
     whatToDoList: [
       "Sente a criança",
       "Incline a cabeça levemente para frente",
@@ -161,21 +161,21 @@ final Map<String, TopicContent> allTopics = {
       "Não ofereça comida ou bebida",
       "Não pare as compressões sem orientação",
     ],
-    solutionImagePath: "",
+    solutionImagePath: "assets/aprender/hemorragianasaissolution.png",
     alertText:
     "Chame o SAMU 192 imediatamente se a criança não responder ou não respirar normalmente.",
   ),
 
   "Queimaduras": TopicContent(
     title: "Queimaduras",
-    emergencyImagePath: "",
+    emergencyImagePath: "assets/aprender/queimaduraemergency.png",
     identifyList: [
       "Vermelhidão na pele",
       "Dor ou ardência",
       "Bolhas",
       "Pele muito clara, escura ou machucada",
     ],
-    techniqueImagePath: "",
+    techniqueImagePath: "assets/aprender/queimaduratechnique.png",
     whatToDoList: [
       "Afaste a criança da fonte de calor",
       "Lave o local com água corrente em temperatura ambiente",
@@ -188,7 +188,7 @@ final Map<String, TopicContent> allTopics = {
       "Não passe pasta de dente, óleo, manteiga ou pomadas caseiras",
       "Não retire roupa grudada na pele",
     ],
-    solutionImagePath: "",
+    solutionImagePath: "assets/aprender/queimadurasolution.png",
     alertText:
     "Chame o SAMU 192 ou Bombeiros 193 se a queimadura for no rosto, mãos, pés, genitais, articulações, ou se for causada por eletricidade, produto químico ou fogo.",
   )

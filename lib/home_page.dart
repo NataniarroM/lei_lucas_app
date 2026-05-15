@@ -363,8 +363,9 @@ class HomePage extends StatelessWidget {
 
                                   child: Image.asset(
                                     'assets/logo_grande.png',
-                                    fit: BoxFit.contain,
-                                  ),
+                                    width: 85,
+                                    height: 85,
+                                  )
                                 ),
                               ),
                             ),

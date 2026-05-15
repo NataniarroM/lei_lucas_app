@@ -344,25 +344,26 @@ class HomePage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                    const LucasLawPage(),
+                                    builder: (context) => const LucasLawPage(),
                                   ),
                                 );
                               },
 
                               child: Container(
-                                width: 120,
-                                height: 120,
+                                width: 85,
+                                height: 85,
 
                                 decoration: const BoxDecoration(
                                   color: Colors.white,
                                   shape: BoxShape.circle,
                                 ),
 
-                                child: ClipOval(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4),
+
                                   child: Image.asset(
                                     'assets/logo_grande.png',
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ),

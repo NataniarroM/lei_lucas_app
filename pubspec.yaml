@@ -60,6 +60,14 @@ flutter:
   assets:
     - assets/
     - assets/aprender/
+    - assets/alergia.png
+    - assets/engasgo.png
+    - assets/ferimento.png
+    - assets/nasais.png
+    - assets/parada.png
+    - assets/queimadura.png
+
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

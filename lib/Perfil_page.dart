@@ -26,8 +26,8 @@ class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
     // Cores premium combinando com a identidade visual do seu app
-    const Color topBg = Color(0xFF0F4C81);
-    const Color bottomBg = Color(0xFF0D5C63);
+    const Color topBg = Color(0xFF337074);
+    const Color bottomBg = Color(0xFF9ED8DB);
     const Color accentYellow = Color(0xFFFFB300);
 
     return Scaffold(
@@ -119,7 +119,7 @@ class _PerfilPageState extends State<PerfilPage> {
                               borderRadius: BorderRadius.circular(24),
                               border: Border.all(color: Colors.white.withOpacity(0.12)),
                               boxShadow: [
-                                BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 15, offset: const Offset(0, 8))
+                                BoxShadow(color: Color(0xFF559197), blurRadius: 7, offset: const Offset(0, 8))
                               ],
                             ),
                             child: Column(
@@ -160,7 +160,7 @@ class _PerfilPageState extends State<PerfilPage> {
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
                                   decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.07),
+                                    color: Color(0xFF559197),
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(color: Colors.white.withOpacity(0.1)),
                                   ),
@@ -184,7 +184,7 @@ class _PerfilPageState extends State<PerfilPage> {
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
                                   decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.07),
+                                    color: Color(0xFF559197),
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(color: Colors.white.withOpacity(0.1)),
                                   ),

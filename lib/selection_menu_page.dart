@@ -20,7 +20,7 @@ class SelectionMenuPage extends StatelessWidget {
         title: const Text(
           "Primeiros socorros",
           style: TextStyle(
-            fontSize: 28,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -60,7 +60,7 @@ class SelectionMenuPage extends StatelessWidget {
                       _subjectButton(context, "Engasgo", "assets/engasgo.png"),
                       _subjectButton(context, "Parada", "assets/parada.png"),
                       _subjectButton(context, "Queimaduras", "assets/queimadura.png"),
-                      _subjectButton(context, "Ferimentos", "assets/ferimentos.png"),
+                      _subjectButton(context, "Ferimentos", "assets/ferimento.png"),
                       _subjectButton(context, "Reações Alérgicas", "assets/alergia.png"),
                       _subjectButton(context, "Hemorragias", "assets/nasais.png"),
                     ],

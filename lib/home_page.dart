@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'credits_page.dart';
 import 'selection_menu_page.dart';
 import 'navigation_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'quiz.dart';
 import 'lucas_law.dart';
+import 'cursos_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -131,64 +131,63 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Corrigido: Letra menor definida diretamente no padrão do botão (fontSize: 16)
+  // SOLUÇÃO DEFINITIVA: Mudança de ElevatedButton para InkWell + Ink.
+  // Isso remove qualquer estrutura quadrada fantasma de fundo.
   Widget _buildMainButton({
     required IconData icon,
     required String text,
     required VoidCallback onPressed,
   }) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
       height: 75,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
           ),
-        ),
-        child: Ink(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-            gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color(0xFF005C66),
-                Color(0xFF001E2B),
-              ],
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 15,
-                offset: const Offset(0, 8),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(24), // Força o efeito de clique a ser redondo
+          child: Ink(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0xFF9ED8DB),
+                  Color(0xFF337074),
+                ],
               ),
-            ],
-          ),
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(icon, color: Colors.white, size: 34),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: Text(
-                    text,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 13, // Alterado de 20 para 16 (letra menor)
-                      fontWeight: FontWeight.bold,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(icon, color: Colors.white, size: 34),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Text(
+                      text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -341,7 +340,7 @@ class HomePage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const CreditsPage(),
+                                    builder: (context) => const CursosPage(),
                                   ),
                                 );
                               },

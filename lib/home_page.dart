@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'credits_page.dart';
 import 'selection_menu_page.dart';
 import 'navigation_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'quiz.dart';
 import 'lucas_law.dart';
+import 'cursos_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,12 +15,11 @@ class HomePage extends StatelessWidget {
       builder: (context) => Dialog(
         backgroundColor: Colors.transparent,
         child: Container(
-          padding: const EdgeInsets.all(25),
-
+          // Ajustado paddings para dar mais respiro vertical nas telas
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           decoration: BoxDecoration(
             color: const Color(0xFFE53935),
             borderRadius: BorderRadius.circular(30),
-
             boxShadow: [
               BoxShadow(
                 color: Colors.red.withOpacity(0.5),
@@ -29,84 +28,68 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-
-              const Icon(
-                Icons.warning_amber_rounded,
-                size: 80,
-                color: Colors.white,
-              ),
-
-              const SizedBox(height: 20),
-
-              const Text(
-                "EMERGÊNCIA",
-
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              // Tornamos a lista de números rolável caso falte espaço na tela
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.warning_amber_rounded,
+                        size: 70, // Reduzido levemente para evitar o overflow
+                        color: Colors.white,
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        "EMERG\u00caNCIA",
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      const Text(
+                        "N\u00fameros importantes",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white70,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      _buildEmergencyNumber("Pol\u00edcia", "190", () => _callNumber("190")),
+                      _buildEmergencyNumber("SAMU", "192", () => _callNumber("192")),
+                      _buildEmergencyNumber("Bombeiros", "193", () => _callNumber("193")),
+                    ],
+                  ),
                 ),
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
 
-              const Text(
-                "Números importantes",
-
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white70,
-                ),
-              ),
-
-              const SizedBox(height: 25),
-
-              _buildEmergencyNumber(
-                "🚓 Polícia",
-                "190",
-                    () => _callNumber("190"),
-              ),
-
-              _buildEmergencyNumber(
-                "🚑 SAMU",
-                "192",
-                    () => _callNumber("192"),
-              ),
-
-              _buildEmergencyNumber(
-                "🚒 Bombeiros",
-                "193",
-                    () => _callNumber("193"),
-              ),
-
-              const SizedBox(height: 30),
-
+              // O botão FECHAR agora fica fixo na base de forma totalmente segura
               SizedBox(
                 width: double.infinity,
-                height: 50,
-
+                height: 48,
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFFE53935),
-
+                    elevation: 2,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-
                   child: const Text(
                     "FECHAR",
-
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      letterSpacing: 1.1,
                     ),
                   ),
                 ),
@@ -119,63 +102,46 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> _callNumber(String number) async {
-    final Uri phoneUri = Uri(
-      scheme: 'tel',
-      path: number,
-    );
-
+    final Uri phoneUri = Uri(scheme: 'tel', path: number);
     if (await canLaunchUrl(phoneUri)) {
       await launchUrl(phoneUri);
     }
   }
 
-  Widget _buildEmergencyNumber(
-      String title,
-      String number,
-      VoidCallback onTap,
-      ) {
+  Widget _buildEmergencyNumber(String title, String number, VoidCallback onTap) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-
-      child: InkWell(
-        onTap: onTap,
-
-        borderRadius: BorderRadius.circular(18),
-
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(15),
-
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.15),
-            borderRadius: BorderRadius.circular(18),
-          ),
-
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-            children: [
-
-              Text(
-                title,
-
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.15),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(18),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white.withOpacity(0.9),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-
-              Text(
-                number,
-
-                style: const TextStyle(
-                  fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  number,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -187,70 +153,56 @@ class HomePage extends StatelessWidget {
     required String text,
     required VoidCallback onPressed,
   }) {
-    return SizedBox(
-      width: 320,
+    return Container(
+      width: double.infinity,
       height: 75,
-
-      child: ElevatedButton(
-        onPressed: onPressed,
-
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
           ),
-        ),
-
-        child: Ink(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
-
-            gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color(0xFF005C66),
-                Color(0xFF001E2B),
-              ],
-            ),
-
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 15,
-                offset: Offset(0, 8),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(24),
+          child: Ink(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: const LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0xFF9ED8DB),
+                  Color(0xFF337074),
+                ],
               ),
-            ],
-          ),
-
-          child: Container(
-            alignment: Alignment.center,
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-
-              children: [
-
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 34,
-                ),
-
-                const SizedBox(width: 15),
-
-                Text(
-                  text,
-
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(icon, color: Colors.white, size: 34),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Text(
+                      text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -264,224 +216,178 @@ class HomePage extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-
             colors: [
               Color(0xFF0D5C63),
               Color(0xFF78F0F0),
             ],
           ),
         ),
-
         child: SafeArea(
           child: Column(
             children: [
-
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(25),
-
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
-
-                      borderRadius: BorderRadius.circular(35),
-
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.15),
-                      ),
-                    ),
-
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-
-                          children: [
-
-                            const Column(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-
+                              children: const [
                                 Text(
                                   "Lei Lucas",
-
                                   style: TextStyle(
                                     fontSize: 42,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFFFB300),
                                   ),
                                 ),
-
-                                SizedBox(height: 10),
-
+                                SizedBox(height: 5),
                                 Text(
                                   "Primeiros socorros",
-
                                   style: TextStyle(
-                                    fontSize: 22,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
                                   ),
                                 ),
                               ],
                             ),
+                          ),
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LucasLawPage(),
+                                ),
+                              );
+                            },
+                            child: SizedBox(
+                              width: 75,
+                              height: 75,
+                              child: Image.asset(
+                                'assets/logo_grande.png',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
 
-                            GestureDetector(
-                              onTap: () {
+                      const SizedBox(height: 20),
+
+                      Container(
+                        width: double.infinity,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFB300),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+
+                      const SizedBox(height: 15),
+
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.08),
+                          borderRadius: BorderRadius.circular(35),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.15),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _buildMainButton(
+                              icon: Icons.psychology_alt_rounded,
+                              text: "QUIZ DE TREINO",
+                              onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const LucasLawPage(),
+                                    builder: (context) => const QuizPage(),
                                   ),
                                 );
                               },
+                            ),
 
-                              child: Container(
-                                width: 85,
-                                height: 85,
+                            const SizedBox(height: 15),
 
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
+                            _buildMainButton(
+                              icon: Icons.menu_book_rounded,
+                              text: "APRENDER",
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SelectionMenuPage(),
+                                  ),
+                                );
+                              },
+                            ),
 
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4),
+                            const SizedBox(height: 15),
 
-                                  child: Image.asset(
-                                    'assets/logo_grande.png',
-                                    width: 85,
-                                    height: 85,
-                                  )
-                                ),
-                              ),
+                            _buildMainButton(
+                              icon: Icons.info_outline_rounded,
+                              text: "INFORMAÇÕES",
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const CursosPage(),
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
+                      ),
 
-                        const SizedBox(height: 25),
+                      const SizedBox(height: 30),
 
-                        Container(
-                          width: double.infinity,
-                          height: 4,
-
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFB300),
-                            borderRadius: BorderRadius.circular(20),
+                      Center(
+                        child: SizedBox(
+                          width: 100,
+                          height: 60,
+                          child: ElevatedButton(
+                            onPressed: () => _openSOS(context),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFE00000),
+                              elevation: 12,
+                              shadowColor: Colors.redAccent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28),
+                              ),
+                            ),
+                            child: const Text(
+                              "SOS",
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
-
-                        const Spacer(),
-
-                        Center(
-                          child: Column(
-                            children: [
-
-                              _buildMainButton(
-                                icon: Icons.psychology_alt_rounded,
-                                text: "QUIZ DE TREINO",
-
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                      const QuizPage(),
-                                    ),
-                                  );
-                                },
-                              ),
-
-                              const SizedBox(height: 25),
-
-                              _buildMainButton(
-                                icon: Icons.menu_book_rounded,
-                                text: "APRENDER",
-
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                      const SelectionMenuPage(),
-                                    ),
-                                  );
-                                },
-                              ),
-
-                              const SizedBox(height: 25),
-
-                              _buildMainButton(
-                                icon: Icons.info_outline_rounded,
-                                text: "INFORMAÇÕES",
-
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                      const CreditsPage(),
-                                    ),
-                                  );
-                                },
-                              ),
-
-                              const SizedBox(height: 50),
-
-                              SizedBox(
-                                width: 180,
-                                height: 75,
-
-                                child: ElevatedButton(
-                                  onPressed: () => _openSOS(context),
-
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFFE00000),
-
-                                    elevation: 12,
-
-                                    shadowColor: Colors.redAccent,
-
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(28),
-                                    ),
-                                  ),
-
-                                  child: const Text(
-                                    "SOS",
-
-                                    style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        const Spacer(),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-
               const NavBar(),
             ],
           ),

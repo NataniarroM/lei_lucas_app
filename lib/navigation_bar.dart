@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lei_lucas/Perfil_page.dart'; // Certifique-se de que o nome do arquivo está exato (letras maiúsculas/minúsculas)
 import 'credits_page.dart';
 
 class NavBar extends StatelessWidget {
@@ -13,7 +14,11 @@ class NavBar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Divider(color: Color(0xFF1D4C50), thickness: 1, indent: 30, endIndent: 30),
+          const Divider(
+              color: Color(0xFF1D4C50),
+              thickness: 1,
+              indent: 30,
+              endIndent: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -21,23 +26,35 @@ class NavBar extends StatelessWidget {
               // Acho que ficou meio serrilhado, mas imagino que foi a melhor imagem que tinha
               IconButton(
                 icon: Image.asset('assets/logo_unisagrado.png', height: 24),
-                onPressed: () => Navigator.push(context,
+                onPressed: () => Navigator.push(
+                  context,
                   MaterialPageRoute(
-                    builder: (context) => const CreditsPage()
-                  )
+                    builder: (context) => const CreditsPage(),
+                  ),
                 ),
               ),
+
               // Home
               // Como pedido, sempre volta para a home
               IconButton(
                 icon: const Icon(Icons.home, color: Color(0xFF1D4C50)),
-                onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                onPressed: () =>
+                    Navigator.of(context).popUntil((route) => route.isFirst),
               ),
+
               // Perfil, vai mostrar o progresso
               // Vou verificar como faremos gatilhos nas páginas
               IconButton(
                 icon: const Icon(Icons.account_circle, color: Color(0xFF1D4C50)),
-                onPressed: () => _showProgressDialog(context),
+                onPressed: () {
+                  // Navegação direta, parênteses e chaves corrigidos!
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PerfilPage(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -57,7 +74,12 @@ class NavBar extends StatelessWidget {
             //Não sei bem como por esse progresso
           ],
         ),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text("OK"))],
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          )
+        ],
       ),
     );
   }

@@ -30,134 +30,120 @@ class SelectionMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // Fundo com o gradiente padrão do projeto
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF1B4D4D), Color(0xFF4FA9A9)],
+      backgroundColor: const Color(0xFF1D5B5E),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          "Primeiros socorros",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              _buildHeader(),
-              Expanded(
-                child: GridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,       // 2 colunas como no rascunho
-                    crossAxisSpacing: 20,    // Espaço lateral entre cards
-                    mainAxisSpacing: 20,     // Espaço vertical entre cards
-                    childAspectRatio: 0.85,  // Ajusta a proporção altura/largura
+      ),
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: Column(
+              children: [
+                // Linha laranja fixa no topo
+                const SizedBox(height: 10),
+                Container(
+                  width: 250,
+                  height: 3,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFB000),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  itemCount: categories.length,
-                  itemBuilder: (context, index) {
-                    return _buildTopicCard(context, categories[index]);
-                  },
                 ),
+
+                // Spacer flexível para empurrar os botões para baixo
+                const Spacer(flex: 2),
+
+                // Grid dos botões
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GridView.count(
+                    shrinkWrap: true, // Garante que não corte o conteúdo
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 15,
+                    childAspectRatio: 1.0,
+                    children: [
+                      _subjectButton(context, "Engasgo", "assets/engasgo.png"),
+                      _subjectButton(context, "Parada", "assets/parada.png"),
+                      _subjectButton(context, "Queimaduras", "assets/queimadura.png"),
+                      _subjectButton(context, "Ferimentos", "assets/ferimento.png"),
+                      _subjectButton(context, "Reações Alérgicas", "assets/alergia.png"),
+                      _subjectButton(context, "Hemorragias", "assets/nasais.png"),
+                    ],
+                  ),
+                ),
+
+                // Spacer inferior maior para manter o equilíbrio
+                const Spacer(flex: 2),
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: const NavBar(),
+    );
+  }
+
+  // Widget do Botão com Animação
+  Widget _subjectButton(BuildContext context, String subject, String imagem) {
+    final ValueNotifier<double> scale = ValueNotifier(1.0);
+
+    return GestureDetector(
+      onTapDown: (_) => scale.value = 0.94,
+      onTapUp: (_) => scale.value = 1.0,
+      onTapCancel: () => scale.value = 1.0,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ContentPage(title: subject),
+          ),
+        );
+      },
+      child: ValueListenableBuilder<double>(
+        valueListenable: scale,
+        builder: (context, value, child) {
+          return AnimatedScale(
+            scale: value,
+            duration: const Duration(milliseconds: 100),
+            child: child,
+          );
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
               ),
-              // Simulação da NavBar (Caso não queira importar o arquivo agora)
-              _buildSimpleNavBar(),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  // Widget dos Cards Individuais
-  Widget _buildTopicCard(BuildContext context, TopicCategory item) {
-    return InkWell(
-      onTap: () => debugPrint("Navegação: ${item.name}"),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            // Barra de cor no topo do card
-            Container(
-              height: 12,
-              decoration: BoxDecoration(
-                color: item.color,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-            ),
-            Expanded(
-              child: Center(
-                child: Image.asset(
-                  item.iconPath,
-                  height: 65,
-                  errorBuilder: (context, error, stackTrace) =>
-                  const Icon(Icons.image_not_supported, color: Colors.grey),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: Text(
-                item.name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Color(0xFF2D6A6A),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Cabeçalho da Tela
-  Widget _buildHeader() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 30, bottom: 10),
-      child: Column(
-        children: [
-          Text(
-            "Primeiros socorros",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 32,
-                fontWeight: FontWeight.bold
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              imagem,
+              fit: BoxFit.fill,
             ),
           ),
-          SizedBox(height: 5),
-          Divider(
-              color: Colors.orange,
-              thickness: 2,
-              indent: 80,
-              endIndent: 80
-          ),
-        ],
-      ),
-    );
-  }
-
-  // NavBar básica integrada para visualização
-  Widget _buildSimpleNavBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Icon(Icons.volunteer_activism, color: Colors.white70),
-          Icon(Icons.home, color: Colors.white, size: 30),
-          Icon(Icons.account_circle, color: Colors.white70),
-        ],
+        ),
       ),
     );
   }

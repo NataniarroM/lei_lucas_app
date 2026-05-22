@@ -68,8 +68,8 @@ class _SplashScreenState extends State<SplashScreen> {
             end: Alignment.bottomCenter,
 
             colors: [
-              Color(0xFF0D5C63),
-              Color(0xFF78F0F0),
+              Color(0xFF337074),
+              Color(0xFF9ED8DB),
             ],
           ),
         ),

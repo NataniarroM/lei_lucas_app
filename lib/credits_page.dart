@@ -74,7 +74,7 @@ class CreditsPage extends StatelessWidget {
                           // LOGO CC LOGO ABAIXO DO TEXTO
                           SizedBox(
                             height: 70,
-                            child: Image.asset("assets/logo_cc.png", fit: BoxFit.contain),
+                            child: Image.asset("assets/Ciencia_da_Computacao.jpg", fit: BoxFit.contain),
                           ),
                           const SizedBox(height: 20),
                           const Text(
@@ -109,7 +109,7 @@ class CreditsPage extends StatelessWidget {
                           // LOGO FINAL
                           SizedBox(
                             height: 70,
-                            child: Image.asset("assets/extensao.png", fit: BoxFit.contain),
+                            child: Image.asset("assets/coordenadoria-de-extensao.jpg", fit: BoxFit.contain),
                           ),
                         ],
                       ),

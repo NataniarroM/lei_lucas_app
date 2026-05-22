@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
-import 'content_page.dart';
-import 'navigation_bar.dart';
 
+// --- 1. MODELO DE DADOS ---
+// Centralizamos aqui para que sua parceira possa editar as categorias facilmente
+class TopicCategory {
+  final String name;
+  final String iconPath;
+  final Color color;
+
+  TopicCategory({
+    required this.name,
+    required this.iconPath,
+    required this.color
+  });
+}
+
+final List<TopicCategory> categories = [
+  TopicCategory(name: "Engasgo", iconPath: "assets/ic_engasgo.png", color: Colors.yellow),
+  TopicCategory(name: "Parada", iconPath: "assets/ic_parada.png", color: Colors.redAccent),
+  TopicCategory(name: "Queimaduras", iconPath: "assets/ic_fogo.png", color: Colors.orange),
+  TopicCategory(name: "Ferimentos", iconPath: "assets/ic_maleta.png", color: Colors.blue),
+  TopicCategory(name: "Reações Alérgicas", iconPath: "assets/ic_bebe.png", color: Colors.purpleAccent),
+  TopicCategory(name: "Hemorragias Nasais", iconPath: "assets/ic_nariz.png", color: Colors.greenAccent),
+];
+
+// --- 2. PÁGINA DE SELEÇÃO ---
 class SelectionMenuPage extends StatelessWidget {
   const SelectionMenuPage({super.key});
 

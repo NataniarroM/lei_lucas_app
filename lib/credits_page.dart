@@ -95,7 +95,7 @@ class CreditsPage extends StatelessWidget {
                           const SizedBox(height: 15),
                           SizedBox(
                             height: 70,
-                            child: Image.asset("assets/logo_cc.png", fit: BoxFit.contain),
+                            child: Image.asset("assets/Ciencia_da_Computacao.jpg", fit: BoxFit.contain),
                           ),
                           const SizedBox(height: 20),
                           const Text(
@@ -148,7 +148,7 @@ class CreditsPage extends StatelessWidget {
 
                           SizedBox(
                             height: 70,
-                            child: Image.asset("assets/extensao.png", fit: BoxFit.contain),
+                            child: Image.asset("assets/coordenadoria-de-extensao.jpg", fit: BoxFit.contain),
                           ),
                         ],
                       ),

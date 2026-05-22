@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'content_page.dart';
+import 'navigation_bar.dart';
 
 // --- 1. MODELO DE DADOS ---
 // Centralizamos aqui para que sua parceira possa editar as categorias facilmente
@@ -13,15 +15,6 @@ class TopicCategory {
     required this.color
   });
 }
-
-final List<TopicCategory> categories = [
-  TopicCategory(name: "Engasgo", iconPath: "assets/ic_engasgo.png", color: Colors.yellow),
-  TopicCategory(name: "Parada", iconPath: "assets/ic_parada.png", color: Colors.redAccent),
-  TopicCategory(name: "Queimaduras", iconPath: "assets/ic_fogo.png", color: Colors.orange),
-  TopicCategory(name: "Ferimentos", iconPath: "assets/ic_maleta.png", color: Colors.blue),
-  TopicCategory(name: "Reações Alérgicas", iconPath: "assets/ic_bebe.png", color: Colors.purpleAccent),
-  TopicCategory(name: "Hemorragias Nasais", iconPath: "assets/ic_nariz.png", color: Colors.greenAccent),
-];
 
 // --- 2. PÁGINA DE SELEÇÃO ---
 class SelectionMenuPage extends StatelessWidget {
@@ -80,11 +73,11 @@ class SelectionMenuPage extends StatelessWidget {
                     childAspectRatio: 1.0,
                     children: [
                       _subjectButton(context, "Engasgo", "assets/engasgo.png"),
-                      _subjectButton(context, "Parada", "assets/parada.png"),
+                      _subjectButton(context, "Parada Cardíaca", "assets/parada.png"),
                       _subjectButton(context, "Queimaduras", "assets/queimadura.png"),
                       _subjectButton(context, "Ferimentos", "assets/ferimento.png"),
                       _subjectButton(context, "Reações Alérgicas", "assets/alergia.png"),
-                      _subjectButton(context, "Hemorragias", "assets/nasais.png"),
+                      _subjectButton(context, "Hemorragias Nasais", "assets/nasais.png"),
                     ],
                   ),
                 ),
@@ -130,7 +123,7 @@ class SelectionMenuPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withValues(alpha: 0.3),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),

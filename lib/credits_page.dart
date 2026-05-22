@@ -91,7 +91,7 @@ class CreditsPage extends StatelessWidget {
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Thainara Tentor Mangile de Barros\nLaisa Ariele Alba\nLorena Ishikawa Aranha\nNataniarro Murilo da Silva\nLeonardo Campos",
+                              "Thainara Tentor Mangile de Barros\nLaisa Ariele Alba\nLorena Ishikawa Aranha\nNataniarro Murilo da Silva\nLeonardo Corrêa Gama",
                               style: TextStyle(color: Colors.white, fontSize: 16, height: 1.5),
                             ),
                           ),

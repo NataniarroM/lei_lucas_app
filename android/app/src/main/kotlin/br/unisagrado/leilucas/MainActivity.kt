@@ -1,4 +1,4 @@
-package br.com.unisagrado.leilucas.lei_lucas
+package br.unisagrado.leilucas
 
 import io.flutter.embedding.android.FlutterActivity
 

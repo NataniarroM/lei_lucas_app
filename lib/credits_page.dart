@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart'; // Importação essencial para abrir links externos
 import 'navigation_bar.dart';
 
 class CreditsPage extends StatelessWidget {
   const CreditsPage({super.key});
+
+  // Função assíncrona responsável por disparar o navegador nativo de forma segura
+  Future<void> _abrirPoliticaPrivacidade(BuildContext context) async {
+    // Cole aqui a URL exata gerada no seu Microsoft Sway ou Google Sites
+    final Uri url = Uri.parse('https://sway.cloud.microsoft/gjobTFcgeaxnedPx?ref=Link');
+
+    try {
+      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+        throw Exception('Não foi possível abrir o link.');
+      }
+    } catch (e) {
+      // Fallback de segurança caso ocorra algum erro inesperado no dispositivo
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Não foi possível abrir a Política de Privacidade no momento.'),
+            backgroundColor: Color(0xFFEF5350),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +71,14 @@ class CreditsPage extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      // Sem 'const' aqui pois usa withOpacity
-                      color: Colors.white.withOpacity(0.15),
+                      color: Colors.white.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),
-                    child: SingleChildScrollView( // Permite scroll se o texto for longo
+                    child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -71,7 +93,6 @@ class CreditsPage extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(height: 15),
-                          // LOGO CC LOGO ABAIXO DO TEXTO
                           SizedBox(
                             height: 70,
                             child: Image.asset("assets/Ciencia_da_Computacao.jpg", fit: BoxFit.contain),
@@ -91,7 +112,7 @@ class CreditsPage extends StatelessWidget {
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              "Thainara Tentor Mangile de Barros\nLaisa Ariele Alba\nLorena Ishikawa Aranha\nNataniarro Murilo da Silva\nLeonardo Campos",
+                              "Thainara Tentor Mangile de Barros\nLaisa Ariele Alba\nLorena Ishikawa Aranha\nNataniarro Murilo da Silva\nLeonardo Corrêa Gama",
                               style: TextStyle(color: Colors.white, fontSize: 16, height: 1.5),
                             ),
                           ),
@@ -106,7 +127,25 @@ class CreditsPage extends StatelessWidget {
                             child: Text("Silvia Ishikawa", style: TextStyle(color: Colors.white, fontSize: 16)),
                           ),
                           const SizedBox(height: 30),
-                          // LOGO FINAL
+
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: Colors.white12),
+                            ),
+                            child: ListTile(
+                              leading: const Icon(Icons.privacy_tip_rounded, color: Color(0xFFFFA100)),
+                              title: const Text(
+                                "Política de Privacidade",
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15),
+                              ),
+                              trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white70, size: 16),
+                              onTap: () => _abrirPoliticaPrivacidade(context),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+
                           SizedBox(
                             height: 70,
                             child: Image.asset("assets/coordenadoria-de-extensao.jpg", fit: BoxFit.contain),

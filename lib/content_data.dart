@@ -138,8 +138,8 @@ final Map<String, TopicContent> allTopics = {
     "Chame o SAMU 192 imediatamente se a criança não responder ou não respirar normalmente.",
   ),
 
-  "Hemorragia Nasais": TopicContent(
-    title: "Hemorragia Nasais",
+  "Hemorragias Nasais": TopicContent(
+    title: "Hemorragias Nasais",
     emergencyImagePath: "assets/aprender/hemorragianasaisemergency.png",
     identifyList: [
       "Sangramento pelo nariz",
